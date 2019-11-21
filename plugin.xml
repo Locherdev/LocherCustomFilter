@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plugin xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/shopware/5.3/engine/Shopware/Components/Plugin/schema/plugin.xsd">
+    <label>Locher Custom Filter</label>
+
+    <version>0.0.1a</version>
+    <link>https://github.com/locherunderscore</link>
+    <author>LocherUnderscore</author>
+
+    <changelog version="0.0.1a">
+        <changes lang="de">Die schmutzigste Demo aller Zeiten</changes>
+        <changes lang="en">The filthiest pre-alpha version you can imagine</changes>
+    </changelog>
+</plugin>

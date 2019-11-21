@@ -1,0 +1,24 @@
+backend -> bestellungen
+
+dropdown-menü (default/ Stücklisten / KeineStücklisten anzeigen)
+-------------------------------------------------
+json-> Bestellungen
+-> Filter
+-> Positionen aller Bestellnummern
+filter(Artikelnummer LIKE "Stücklisten-Artikel%")
+
+
+json
+1. json: alles anzeigen
+2. json: alle stücklisten
+3. json: gar keine stücklisten
+	->	kein komplettservice SW2000999
+
+
+------------------------------------------------------------------------------
+
+HR-Filter:
+	Kein Filter	(default)
+	FertigPCs	(Stücklisten)
+	Indi-PCs	(Keine Stücklisten + KOMPLETTSERVICE) //mit ausnahme "checkboxfield-7261-inputEl" SW10480
+	Einzelteile	(KEIN Stücklisten + KEIN KOMPLETTSERVICE)

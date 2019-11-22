@@ -6,6 +6,7 @@
     <version>0.0.1a</version>
     <link>https://github.com/locherunderscore</link>
     <author>LocherUnderscore</author>
+    <description>Erweiterter Bestellungsfilter für den HardwareRat-Onlineshop.</description>
 
     <changelog version="0.0.1a">
         <changes lang="de">Die schmutzigste Demo aller Zeiten</changes>

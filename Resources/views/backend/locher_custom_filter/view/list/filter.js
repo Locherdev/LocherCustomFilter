@@ -28,7 +28,6 @@ Ext.define('Shopware.apps.Order.view.list.Filter', {
     /**
      * Contains all snippets for the view component
      * This override adds custom filter-specific snippets
-     * @object
      */
     snippets:{
         title:'{s name=filter/title}Filter options{/s}',
@@ -115,7 +114,6 @@ Ext.define('Shopware.apps.Order.view.list.Filter', {
 
     /**
      * This override adds the custom filter at the very end of the form
-     * @returns {Ext.form.Panel}
      */
     createFilterForm: function() {
         var me = this;
@@ -331,7 +329,6 @@ Ext.define('Shopware.apps.Order.view.list.Filter', {
 
     /**
      * This new function() creates the ComboBox metadata
-     * @returns {Ext.form.field.ComboBox}
      */
     createCustomFilterSelection: function() {
         var me = this;
@@ -348,7 +345,6 @@ Ext.define('Shopware.apps.Order.view.list.Filter', {
 
     /**
      * This new function() adds the selectable options of our custom filter
-     * @returns {Ext.data.Store}
      */
     createFilterSelection: function() {
         var me = this;

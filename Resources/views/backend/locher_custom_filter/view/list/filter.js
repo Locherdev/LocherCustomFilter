@@ -6,7 +6,7 @@ Ext.define('Shopware.apps.LocherCustomFilter.view.list.Filter', {
     override: 'Shopware.apps.Order.view.list.Filter',
 
     /**
-     * Contains all snippets for the view component
+     * This override adds custom filter-specific snippets
      * @object
      */
     snippets:{
@@ -38,10 +38,8 @@ Ext.define('Shopware.apps.LocherCustomFilter.view.list.Filter', {
     },
 
     /**
-     * Creates the form filter fields which displayed on the left hand of
-     * the order list. The filters will be perform by the "Perform filters" button
-     * which displayed under the form.
-     * @return [Ext.form.Panel]
+     * This override adds the custom filter at the very end of the form
+     * @returns {Ext.form.Panel}
      */
     createFilterForm: function() {
         var me = this;
@@ -76,6 +74,10 @@ Ext.define('Shopware.apps.LocherCustomFilter.view.list.Filter', {
         return me.filterForm;
     },
 
+    /**
+     * This new function() creates the ComboBox metadata
+     * @returns {Ext.form.field.ComboBox}
+     */
     createCustomFilterSelection: function() {
         var me = this;
 
@@ -89,6 +91,10 @@ Ext.define('Shopware.apps.LocherCustomFilter.view.list.Filter', {
         });
     },
 
+    /**
+     * This new function() adds the selectable options of our custom filter
+     * @returns {Ext.data.Store}
+     */
     createFilterSelection: function() {
         var me = this;
 

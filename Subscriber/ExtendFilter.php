@@ -47,6 +47,13 @@ class ExtendFilter implements SubscriberInterface
         }
     }
 
+    /**
+     * @param \Enlight_Hook_HookArgs $args
+     * What does this hook do?
+     * It checks for our custom order-filter which is the last array-object of our filter-param.
+     * If there is one, we will set its value to a global_var.
+     * Also delete the filter-object from the filter-param to avoid Doctrine errors
+     */
     public function before_getListAction(\Enlight_Hook_HookArgs $args) {
         $request = $args->getSubject()->Request();
         $filter = $request->getParam('filter');
@@ -60,6 +67,13 @@ class ExtendFilter implements SubscriberInterface
         $request->setParam('filter', $filter);
     }
 
+
+    /**
+     * @param \Enlight_Hook_HookArgs $args
+     * What does this hook do?
+     * If a custom order-filter is found, we need to apply the custom filtering.
+     * Due to that, we get the assigned list of orders, apply the filtering, then reassign it
+     */
     public function after_getListAction(\Enlight_Hook_HookArgs $args) {
         if ($GLOBALS["customFilter"] != null) {
             $list = $args->getSubject()->View()->getAssign();
@@ -94,12 +108,18 @@ class ExtendFilter implements SubscriberInterface
                 $filteredList[] = $individualOrder;
             }
         }
+        // rebuilding the $list, now that the order-amount has been changed
         $returnList['data'] = $filteredList;
         $returnList['success'] = $list['success'];
         $returnList['total'] = count($filteredList);
         return $returnList;
     }
 
+    /**
+     * @param $individualOrder
+     * @return bool=yes if substring is found, false if not
+     * Checks the beginning of the articleName for a specific substring
+     */
     private function has_StuecklistenArtikel($individualOrder) {
         foreach($individualOrder['details'] as $product) {
             if(strpos($product['articleName'], "Stücklisten-Artikel") === 0) return true;
@@ -107,6 +127,11 @@ class ExtendFilter implements SubscriberInterface
         return false;
     }
 
+    /**
+     * @param $individualOrder
+     * @return bool=yes if articleNumber is identical to any product, false if not
+     * Checks if the order includes a specific article with its specific articleNumber
+     */
     private function has_KomplettService($individualOrder) {
         foreach($individualOrder['details'] as $product) {
             if($product['articleNumber'] == 'SW2000999') return true;

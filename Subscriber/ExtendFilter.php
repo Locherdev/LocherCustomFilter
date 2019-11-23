@@ -67,7 +67,6 @@ class ExtendFilter implements SubscriberInterface
         $request->setParam('filter', $filter);
     }
 
-
     /**
      * @param \Enlight_Hook_HookArgs $args
      * What does this hook do?

@@ -334,10 +334,11 @@ Ext.define('Shopware.apps.Order.view.list.Filter', {
         var me = this;
 
         return Ext.create('Ext.form.field.ComboBox', {
-            name: 'filter',
+            name: 'customFilter',
             displayField: 'name',
             valueField: 'name',
             store: me.createFilterSelection(),
+            emptyText: me.snippets.empty,
             fieldLabel: me.snippets.filter
         });
     },
@@ -350,7 +351,6 @@ Ext.define('Shopware.apps.Order.view.list.Filter', {
                 { name: 'name' }
             ],
             data: [
-                { name: me.snippets.empty },
                 { name: me.snippets.filterComplete },
                 { name: me.snippets.filterIndividual },
                 { name: me.snippets.filterPiece }
@@ -445,5 +445,4 @@ Ext.define('Shopware.apps.Order.view.list.Filter', {
         });
     }
 });
-console.log("My very first backend-plugin");
 //{/block}

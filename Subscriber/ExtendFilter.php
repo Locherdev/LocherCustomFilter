@@ -6,25 +6,15 @@ use Enlight\Event\SubscriberInterface;
 
 $GLOBALS["customFilter"] = null;
 
-class ExtendFilter implements SubscriberInterface
-{
-    /**
-     * @var string
-     */
+class ExtendFilter implements SubscriberInterface {
+
     private $pluginDirectory;
 
-    /**
-     * @param $pluginDirectory
-     */
-    public function __construct($pluginDirectory)
-    {
+    public function __construct($pluginDirectory) {
         $this->pluginDirectory = $pluginDirectory;
     }
-    /**
-     * {@inheritdoc}
-     */
-    public static function getSubscribedEvents()
-    {
+
+    public static function getSubscribedEvents() {
         return [
             'Enlight_Controller_Action_PostDispatchSecure_Backend_Order' => 'onOrderPostDispatch',
             'Shopware_Controllers_Backend_Order::getListAction::before' => 'before_getListAction',
@@ -32,8 +22,7 @@ class ExtendFilter implements SubscriberInterface
         ];
     }
 
-    public function onOrderPostDispatch(\Enlight_Event_EventArgs $args)
-    {
+    public function onOrderPostDispatch(\Enlight_Event_EventArgs $args) {
         /** @var \Shopware_Controllers_Backend_Customer $controller */
         $controller = $args->getSubject();
 
@@ -77,14 +66,14 @@ class ExtendFilter implements SubscriberInterface
     public function after_getListAction(\Enlight_Hook_HookArgs $args) {
         if ($GLOBALS["customFilter"] != null) {
             $list = $args->getSubject()->View()->getAssign();
-            $list = $this->applyCustomFilter($list);
+            $list['data'] = $this->applyCustomFilter($list['data']);
             $args->getSubject()->View()->assign($list);
         }
     }
 
-    private function applyCustomFilter($list) {
-        $filteredList = [];
-        foreach($list['data'] as $individualOrder) {
+    private function applyCustomFilter($data) {
+        $filteredData = [];
+        foreach($data as $individualOrder) {
             $keepItem = true;
             switch($GLOBALS["customFilter"]) {
                 case 'Nur Fertig-PCs':
@@ -105,14 +94,10 @@ class ExtendFilter implements SubscriberInterface
                     break;
             }
             if ($keepItem) {
-                $filteredList[] = $individualOrder;
+                $filteredData[] = $individualOrder;
             }
         }
-        // rebuilding the $list, now that the order-amount has been changed
-        $returnList['data'] = $filteredList;
-        $returnList['success'] = $list['success'];
-        $returnList['total'] = count($filteredList);
-        return $returnList;
+        return $filteredData;
     }
 
     /**
